@@ -2,20 +2,20 @@ package execute;
 
 import components.Board;
 import components.Game;
-import components.Player;
+import players.ManualPlayer;
+import components.Timekeeper;
+import players.RandomPlayer;
 
 public class Main {
     public static void main(String[] args) {
         Board board = new Board(15, 20);
-        Runnable p1 = new Player("Stefan");
-        Runnable p2 = new Player("Maria");
-        Runnable p3 = new Player("Teodora");
+        Game game = new Game(board, 4);
+        Runnable p1 = new ManualPlayer("Stefan", board, game.getK(), board.getN(), 1);
+        Runnable p2 = new RandomPlayer("Nicoleta", board, game.getK(), board.getN(), -1);
+        Runnable timeKeeper = new Timekeeper();
 
-        board.setTokens();
-        Game game = new Game(board, 3);
-        game.addPlayer(p1);
-        game.addPlayer(p2);
-        game.addPlayer(p3);
+        game.setPlayers(new Runnable[]{p1, p2});
+        game.setTimeKeeper(timeKeeper);
 
         game.play();
     }

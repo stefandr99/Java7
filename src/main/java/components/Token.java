@@ -22,9 +22,9 @@ public class Token implements Comparable<Token> {
     }
 
     /**
-     * Am implementat un comparable pentru ca am neovie sa sortez lista de tokeni mai tarziu
-     * @param t1
-     * @return
+     * Am implementat un comparable pentru ca voi sorta lista de tokeni pentru a calcula prograsia aritmetica maxima
+     * @param t1 Celalalt Token pe care il compar
+     * @return valoare ce arata care din Token-uri are valoare mai mare.
      */
     public int compareTo(Token t1) {
         return this.value - t1.getValue();

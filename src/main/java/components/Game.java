@@ -1,11 +1,12 @@
 package components;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Game {
     Board board;
-    List<Runnable> players = new ArrayList<>();
+    Runnable player1, player2, timeKeeper;
     int k;
 
     public Game(Board board, int k) {
@@ -13,21 +14,35 @@ public class Game {
         this.k = k;
     }
 
-    public void addPlayer(Runnable player) {
-        players.add(player);
+    public void setPlayer1(Runnable player) {
+        player1 = player;
     }
 
-    public void addPlayers(List<Runnable> player) {
-        players.addAll(player);
+    public void setPlayer2(Runnable player) {
+        player2 = player;
+    }
+
+    public void setPlayers(Runnable[] player) {
+        player1 = player[0];
+        player2 = player[1];
+    }
+
+    public int getK() {
+        return k;
+    }
+
+    public void setTimeKeeper(Runnable timeKeeper) {
+        this.timeKeeper = timeKeeper;
     }
 
     /**
-     * Functie unde lansez in executie toti player-ii. O incercare, nu m-am prins inca exact cum functioneaza
-     * toate lucrurile astea cu thread-uri. Nu functioneaza
+     * Functie in care lansez in executie toti player-ii.
+     * Aici este comentat timekeeperul deoarece am considerat ca intr-un joc cu player manual nu are sens
+     * Pentru un joc doar cu coputerul, se poate decomenta si functioneaza foarte bine.
      */
     public void play() {
-        for (Runnable p: players) {
-            new Thread(p).start();
-        }
+        new Thread(player1).start();
+        new Thread(player2).start();
+        //new Thread(timeKeeper).start();
     }
 }
